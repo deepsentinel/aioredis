@@ -335,11 +335,12 @@ class Receiver:
     # internal methods
 
     def _put_nowait(self, data, *, sender):
-        if self._queue.closed:
-            logger.warning("Pub/Sub listener message after stop:"
-                           " sender: %r, data: %r",
-                           sender, data)
-            return
+        # DEEPSENTINEL: comment this out, something wrong there
+        # if self._queue.closed:
+        #     logger.warning("Pub/Sub listener message after stop:"
+        #                    " sender: %r, data: %r",
+        #                    sender, data)
+        #     return
         self._queue.put((sender, data))
 
     def _close(self, sender, exc=None):
